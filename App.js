@@ -12,41 +12,35 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const HomeScreen = ({navigation}) => {
-  return(
-    <View style={{flex: 1, alignItems: "center", justifyContent: 'center'}}>
-      <Text>HomeScreen</Text>
-      <Button 
-        title="Go to details screen"
-        onPress={() => navigation.navigate("Details")}
-      />
-    </View>
-  )
-}
+import HomeScreen from './screens/HomeScreen';
+import DetailsScreen from './screens/DetailsScreen';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const DetailsScreen = ({navigation}) => {
-  return(
-    <View style={{flex: 1, alignItems: "center", justifyContent: 'center'}}>
-      <Text>Details Screen</Text>
-      <Button 
-        title="Go to home screen"
-        onPress={() => navigation.navigate("Home")}
-      />
-    </View>
-  )
-}
+const HomeStack = createStackNavigator();
+const DetailsStack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
-const Stack = createStackNavigator();
+const HomeStackScreen = ({navigation}) => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen name="Home" component={HomeScreen} options={{title: 'Overview'}}/>
+  </HomeStack.Navigator>
+)
+
+const DetailsStackScreen = ({navigation}) => (
+  <DetailsStack.Navigator>
+    <DetailsStack.Screen name="Details" component={DetailsScreen} options={{title: 'Details'}}/>
+  </DetailsStack.Navigator>
+)
 
 const App = () => {
   return(
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeStackScreen} />
+        <Drawer.Screen name="Details" component={DetailsStackScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   )
-}
+} 
 
 export default App;
