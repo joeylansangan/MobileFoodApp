@@ -4,6 +4,7 @@ import {
     Image, StyleSheet, Dimensions 
 } from 'react-native';
 
+import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
@@ -13,13 +14,16 @@ const SplashScreen = ({navigation}) => {
     return(
       <View style={styles.container}>
           <View style={styles.header}>
-              <Image 
+              <Animatable.Image 
+                animation="bounceIn"
                 source={require('./assets/swipewhitetrans.png')}
                 style={styles.logo}
                 resizeMode="stretch"
               />
           </View>
-          <View style={styles.footer}>
+          <Animatable.View 
+            animation="fadeInUpBig"
+            style={styles.footer}>
                 <Text style={styles.title}>Support your local restaurants!</Text>
                 <Text style={styles.text}>Sign in with account</Text>
                 <View style={styles.button}>
@@ -37,7 +41,7 @@ const SplashScreen = ({navigation}) => {
                     </LinearGradient>
                 </TouchableOpacity>
                </View>
-          </View>
+          </Animatable.View>
       </View>
     )
   }
