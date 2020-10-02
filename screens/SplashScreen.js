@@ -4,6 +4,11 @@ import {
     Image, StyleSheet, Dimensions 
 } from 'react-native';
 
+import LinearGradient from 'react-native-linear-gradient';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+MaterialIcons.loadFont();
+
 const SplashScreen = ({navigation}) => {
     return(
       <View style={styles.container}>
@@ -16,7 +21,22 @@ const SplashScreen = ({navigation}) => {
           </View>
           <View style={styles.footer}>
                 <Text style={styles.title}>Support your local restaurants!</Text>
-               <Text style={styles.text}>Sign in with account</Text>
+                <Text style={styles.text}>Sign in with account</Text>
+                <View style={styles.button}>
+                <TouchableOpacity onPress={()=>navigation.navigate('SignInScreen')}>
+                    <LinearGradient
+                            colors={['#9b1b24', '#ef473a']}
+                            style={styles.signIn}
+                    >
+                        <Text style={styles.textSign}>Get Started</Text>
+                        <MaterialIcons
+                            name="navigate-next"
+                            color="#fff"
+                            size={20}
+                            />
+                    </LinearGradient>
+                </TouchableOpacity>
+               </View>
           </View>
       </View>
     )
