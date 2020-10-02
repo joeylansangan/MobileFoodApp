@@ -38,7 +38,7 @@ const MainTabScreen = () => (
         name="Notifications"
         component={DetailsStackScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Notifications',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />
           ),
@@ -48,9 +48,9 @@ const MainTabScreen = () => (
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
         }}
       />
@@ -58,9 +58,9 @@ const MainTabScreen = () => (
         name="Explore"
         component={ExploreScreen}
         options={{
-          tabBarLabel: 'Explore me',
+          tabBarLabel: 'Explore',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
+            <MaterialCommunityIcons name="map-legend" color={color} size={26} />
           ),
         }}
       />
