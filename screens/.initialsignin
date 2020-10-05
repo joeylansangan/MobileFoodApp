@@ -1,0 +1,68 @@
+<View style={styles.container}>
+          <StatusBar backgroundColor='#9b1b24'/>
+        <View style={styles.header}>
+            <Text style={styles.text_header}>Welcome!</Text>
+        </View>
+        <Animatable.View 
+            animation="fadeInUpBig"
+            style={styles.footer}
+        >
+            <Text style={styles.text_footer}>Username</Text>
+            <View style={styles.action}>
+                <FontAwesome 
+                    name="user-o"
+                    size={20}
+                />
+                <TextInput 
+                    placeholder="Your Username"
+                    placeholderTextColor="#666666"
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                />
+
+            </View>            
+
+            <Text style={styles.text_footer}>Password</Text>
+            <View style={styles.action}>
+                <Feather 
+                    name="lock"
+                    size={20}
+                />
+                <TextInput 
+                    placeholder="Your Password"
+                    placeholderTextColor="#666666"
+                    secureTextEntry={true}
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                />
+            </View>            
+            <TouchableOpacity>
+                <Text style={{color: '#D76B5B', marginTop:15}}>Forgot password?</Text>
+            </TouchableOpacity>
+            <View style={styles.button}>
+                <TouchableOpacity
+                    style={styles.signIn}
+                >
+                <LinearGradient
+                    colors={['#9b1b24', '#ef473a']}
+                    style={styles.signIn}
+                >
+                    <Text style={[styles.textSign, {
+                        color:'#fff'
+                    }]}>Sign In</Text>
+                </LinearGradient>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('SignUpScreen')}
+                    style={[styles.signIn, {
+                        borderColor: '#9b1b24',
+                        borderWidth: 1,
+                        marginTop: 15
+                    }]}
+                >
+                    <Text style={[styles.textSign, {color: '#9b1b24'}]}>Sign Up</Text>
+                </TouchableOpacity>
+            </View>
+        </Animatable.View>
+      </View>
