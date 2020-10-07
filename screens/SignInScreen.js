@@ -24,7 +24,10 @@ const SignInScreen = ({navigation}) => {
       email:'',
       password: '',
       check_textInputChange: false,
-      secureTExtEntry: true
+      secureTExtEntry: true,
+      isValidUser: true,
+      isValidPassword: true,
+
     })
 
     const textInputChange = (val) => {
@@ -32,13 +35,15 @@ const SignInScreen = ({navigation}) => {
           setData({
               ...data, 
               username: val,
-              check_textInputChange: true
+              check_textInputChange: true,
+              isValidUser: true
           });
       } else {
           setData({
               ...data,
               username: val,
-              check_textInputChange: false
+              check_textInputChange: false,
+              isValidUser: false
           });
       }
     }
@@ -55,6 +60,20 @@ const SignInScreen = ({navigation}) => {
           ...data,
           secureTextEntry: !data.secureTextEntry 
       })
+    }
+
+    const handleValidUser = (val) => {
+      if( val.trim().length >= 4 ) {
+          setData({
+              ...data,
+              isValidUser: true
+          });
+      } else {
+          setData({
+              ...data,
+              isValidUser: false
+          });
+      }
     }
 
     return(
@@ -79,6 +98,7 @@ const SignInScreen = ({navigation}) => {
                     style={styles.textInput}
                     autoCapitalize="none"
                     onChangeText={(val) => textInputChange(val)}
+                    onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
                 />
                  {data.check_textInputChange ? 
                  <Feather 
@@ -87,7 +107,14 @@ const SignInScreen = ({navigation}) => {
                   size={20}
                 />
                 : null }
-            </View>            
+            </View>
+            { data.isValidUser ? null : 
+            <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Username must be 4 characters long.</Text>
+            </Animatable.View>
+            }
+            
+            
 
             <Text style={styles.text_footer}>Password</Text>
             <View style={styles.action}>
