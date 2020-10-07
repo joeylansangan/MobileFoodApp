@@ -49,11 +49,20 @@ const SignInScreen = ({navigation}) => {
     }
     
     const handlePasswordChange = (val) => {
-      setData({
-        ...data,
-        password: val
-      })
-    }
+      if( val.trim().length >= 8 ) {
+          setData({
+              ...data,
+              password: val,
+              isValidPassword: true
+          });
+      } else {
+          setData({
+              ...data,
+              password: val,
+              isValidPassword: false
+          });
+      }
+  }
 
     const updateSecureTextEntry = () => {
       setData({
@@ -148,7 +157,12 @@ const SignInScreen = ({navigation}) => {
                   }
                 </TouchableOpacity>
                 
-            </View>            
+            </View>        
+            { data.isValidPassword ? null : 
+            <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+            </Animatable.View>
+            }    
             <TouchableOpacity>
                 <Text style={{color: '#D76B5B', marginTop:15}}>Forgot password?</Text>
             </TouchableOpacity>
