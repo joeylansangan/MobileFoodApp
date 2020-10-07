@@ -10,6 +10,8 @@ import {
   Alert
 } from 'react-native';
 
+import {AuthContext} from '../components/context'
+
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -30,6 +32,8 @@ const SignInScreen = ({navigation}) => {
 
     })
 
+    const { signIn } = React.useContext(AuthContext);
+    
     const textInputChange = (val) => {
       if( val.trim().length >= 4 ) {
           setData({
@@ -169,6 +173,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
+                    onPress={() => {signIn()}}
                 >
                 <LinearGradient
                     colors={['#9b1b24', '#ef473a']}

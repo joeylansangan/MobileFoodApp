@@ -17,6 +17,8 @@ import {
     DrawerItem 
 } from '@react-navigation/drawer';
 
+import { AuthContext } from '../components/context'
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 Icon.loadFont();
@@ -24,6 +26,8 @@ Icon.loadFont();
 export function DrawerContent(props) {
 
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+
+    const { signOut } = React.useContext(AuthContext);
 
     const toggleTheme = () => {
         setIsDarkTheme(!isDarkTheme);
@@ -135,7 +139,7 @@ export function DrawerContent(props) {
                             />
                     )}
                     label="Sign Out"
-                    // onPress={() => {signOut()}}
+                    onPress={() => {signOut()}}
                 />
             </Drawer.Section>
         </View>
