@@ -65,21 +65,16 @@ const App = () => {
     const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState)
 
   const authContext = React.useMemo(() => ({
-    signIn: async(userName, password) => {
-      let userToken;
-      userToken = null;
-      if ( userName == 'user' && password == 'pass' ){
-        userToken = 'dfgdfg'
+    signIn: async(foundUser) => {
+      const userToken = String(foundUser[0].userToken);
+      const userName = foundUser[0].username;
         try{
           userToken = 'dfgdfg';
           await AsyncStorage.setItem('userToken', userToken)
           } catch(e) {
             console.log(e)
           }
-      }
       dispatch({ type: 'LOGIN', id: userName, token: userToken });
-      // setUserToken('fgkj');
-      // setIsLoading(false);
     },
     signOut: async() => {
       // setUserToken(null);
