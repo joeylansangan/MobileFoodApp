@@ -4,6 +4,8 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import MainTabScreen from './screens/MainTabScreen';
 import SupportScreen from './screens/SupportScreen'
 import SettingsScreen from './screens/SettingsScreen';
@@ -63,19 +65,30 @@ const App = () => {
     const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState)
 
   const authContext = React.useMemo(() => ({
-    signIn: (userName, password) => {
+    signIn: async(userName, password) => {
       let userToken;
-      userName = null;
+      userToken = null;
       if ( userName == 'user' && password == 'pass' ){
         userToken = 'dfgdfg'
+        try{
+          userToken = 'dfgdfg';
+          await AsyncStorage.setItem('userToken', userToken)
+          } catch(e) {
+            console.log(e)
+          }
       }
-      dispatch({ type: 'LOGIN', id: userName, token: userTOken });
+      dispatch({ type: 'LOGIN', id: userName, token: userToken });
       // setUserToken('fgkj');
       // setIsLoading(false);
     },
-    signOut: () => {
+    signOut: async() => {
       // setUserToken(null);
       // setIsLoading(false);
+      try{
+        await AsyncStorage.removeItem('userToken')
+        } catch(e) {
+          console.log(e)
+        }
       dispatch({ type: 'LOGOUT'});
     },
     signUp: () => {
@@ -85,9 +98,16 @@ const App = () => {
   }), []);
 
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async() => {
       // setIsLoading(false);
-      dispatch({ type: 'RETRIEVE_TOKEN', token: 'dfklj' })
+      let userToken;
+      userToken = null
+      try{
+        userToken = await AsyncStorage.getItem('userToken')
+        } catch(e) {
+          console.log(e)
+        }
+      dispatch({ type: 'RETRIEVE_TOKEN', token: userToken })
     }, 1000)
   }, []);
 

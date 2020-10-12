@@ -23,7 +23,7 @@ Feather.loadFont();
 const SignInScreen = ({navigation}) => {
 
     const [data,setData] = React.useState({
-      email:'',
+      username:'',
       password: '',
       check_textInputChange: false,
       secureTExtEntry: true,
@@ -87,6 +87,10 @@ const SignInScreen = ({navigation}) => {
               isValidUser: false
           });
       }
+    }
+
+    const loginHandle = ( username, password) => {
+      signIn(username, password);
     }
 
     return(
@@ -173,7 +177,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => {signIn()}}
+                    onPress={() => {loginHandle( data.username, data.password)}}
                 >
                 <LinearGradient
                     colors={['#9b1b24', '#ef473a']}
