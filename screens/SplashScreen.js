@@ -4,6 +4,8 @@ import {
     Image, StyleSheet, Dimensions 
 } from 'react-native';
 
+import {useTheme} from '@react-navigation/native';
+
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -11,6 +13,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 MaterialIcons.loadFont();
 
 const SplashScreen = ({navigation}) => {
+
+    const {colors} = useTheme();
+
     return(
       <View style={styles.container}>
           <View style={styles.header}>
@@ -22,8 +27,11 @@ const SplashScreen = ({navigation}) => {
               />
           </View>
           <Animatable.View 
+            style={[styles.footer, {
+                backgroundColor: colors.background  
+            }]} 
             animation="fadeInUpBig"
-            style={styles.footer}>
+            >
                 <Text style={styles.title}>Support your local restaurants!</Text>
                 <Text style={styles.text}>Sign in with account</Text>
                 <View style={styles.button}>
